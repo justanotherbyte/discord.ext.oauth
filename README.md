@@ -115,6 +115,9 @@ Installing the `discord.web` library is a breeze. Here we list both ways of inst
   ```sh
   pip install discord.web
   ```
+  ```sh
+  pip install git+https://github.com/quiktea/discord.web/
+  ```
 
 
 
