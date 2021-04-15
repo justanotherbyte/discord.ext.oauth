@@ -2,3 +2,5 @@ Lib/
 Scripts/
 pyvenv.cfg
 debug.json
+x.py
+tests.py
