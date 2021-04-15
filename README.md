@@ -93,17 +93,17 @@ Welcome to the Getting Started Section. Here, we explain how you can get started
 ### Prerequisites
 
 Here's a list of prerequisites that you will need for the discord-web library to work. Keep in mind that all of these (with the exception of `aiohttp[speedups]`) are installed when installing `discord.web`
-* pip
+* discord.py
   ```sh
   pip install discord.py
   ```
-* pip
+* aiohttp
   ```sh
   pip install aiohttp
   ```
 #### Installing the speedups for aiohttp
 If you wish, you can install the speedups package for aiohttp, which allows aiohttp to run requests much faster.
-* pip
+* aiohttp speedups
   ```sh
   pip install aiohttp[speedups]
   ```
@@ -112,7 +112,6 @@ If you wish, you can install the speedups package for aiohttp, which allows aioh
 ### Installation
 
 Installing the `discord.web` library is a breeze. Here we list both ways of installing the library (the stable version and the development version)
-* pip
   ```sh
   pip install discord.web
   ```
