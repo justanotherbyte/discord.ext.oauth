@@ -20,7 +20,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -200,6 +199,4 @@ Project Link: [https://github.com/quiktea/discord.web](https://github.com/quikte
 [issues-url]: https://github.com/quiktea/discord.web/issues
 [license-shield]: https://img.shields.io/github/license/quiktea/discord.web.svg?style=for-the-badge
 [license-url]: https://github.com/quiktea/discord.web/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/quiktea
 [product-screenshot]: .github/screenshot.png

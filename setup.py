@@ -12,7 +12,7 @@ DESCRIPTION = 'An async wrapper for the Discord Oauth2 API'
 # Setting up
 setup(
     name="discord.web",
-    version="0.0.1a",
+    version="0.0.2",
     author="quiktea",
     author_email="wishymovies@gmail.com",
     description=DESCRIPTION,
