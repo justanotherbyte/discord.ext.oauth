@@ -121,7 +121,18 @@ Installing the `discord.web` library is a breeze. Here we list both ways of inst
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+First of all, you need to create an application on the [Discord Developer Portal](https://discord.com/developers). Once you do that, click on the OAuth2 tab and follow the example below:
+![OAuth2 Example](https://media.discordapp.net/attachments/773312837623218247/832320134416826398/unknown.png?width=1176&height=676)
+
+#### Initialising an OAuth2 Client
+To initialise an OAuth2 Client, simply follow the example below:
+```py
+from discord_web.oauth2 import Oauth2Client
+
+client = Oauth2Client(client_id, "client_secret", "redirect_uri", ["scope1", "scope2"])
+```
+#### Generating an Access Token
+To access a user's info, you need what's called an `Access Token`. To get an access token, you first need the code given to you by the OAuth2 login url that you created on the [Discord Developer Portal](https://discord.com/developers). After a user logins in using your URL, they will be redirected to the `redirect_uri` that you provided on the Developer Portal. After getting redirected, the URL on your end will be returned with the `code` URL parameter, which looks like so: `https://example.com/?code=CODE`. You will need to access this code. In Django, you would access it like so: `request.GET.get("code")`. This is the code that you pass into the `exchange_code` function. The function will then return an `AccessToken` object which holds information such as the `refresh_token` and the `access_token`. To access the access token, simply reference the `access_token` property of your AccessToken class.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -157,7 +168,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Discord - [discord.web](https://discord.gg/JmhWrK99GS) - email@example.com
+Discord - [discord.web](https://discord.gg/JmhWrK99GS) - https://discord.gg/JmhWrK99GS
 
 Project Link: [https://github.com/your_username/repo_name](https://github.com/quiktea/discord.web)
 
@@ -165,17 +176,10 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/qu
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
+* [Python](https://python.org)
+* [aiohttp](https://docs.aiohttp.org/en/stable/)
+* [discord.py](https://discordpy.readthedocs.io/en/stable/)
+* [Rapptz (Danny)](https://github.com/rapptz)
 
 
 

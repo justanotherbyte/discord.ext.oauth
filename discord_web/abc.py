@@ -78,7 +78,6 @@ class Oauth2Member:
         access_token = access_token or self.__token__
         async with self.__session__.get("https://discord.com/api/v8/users/@me/guilds", headers = {"Authorization" : "Bearer {}".format(access_token)}) as response:
             data = await response.json()
-            await checks.screen_response(data)
             guilds = []
             for guild in data:
                 guild_obj = Oauth2Guild(guild)
@@ -123,7 +122,7 @@ class Oauth2Member:
         return self._payload["mfa_enabled"]
 
     @property
-    def email(self) -> str:
+    def email(self) -> str or None:
         return self._payload["email"]
 
     @property
