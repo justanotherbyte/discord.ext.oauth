@@ -130,7 +130,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/quiktea/discord.web/issues) for a list of proposed features (and known issues).
 
 
 
@@ -157,9 +157,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Discord - [discord.web](https://discord.gg/JmhWrK99GS) - email@example.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/your_username/repo_name](https://github.com/quiktea/discord.web)
 
 
 
@@ -185,14 +185,14 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/quiktea/discord.web?style=for-the-badge
 [contributors-url]: https://github.com/quiktea/discord.web/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/discord.web.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/discord.web/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/discord.web.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/discord.web/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/discord.web.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/discord.web/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/discord.web.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/discord.web/blob/master/LICENSE.txt
+[forks-shield]: https://img.shields.io/github/forks/quiktea/discord.web.svg?style=for-the-badge
+[forks-url]: https://github.com/quiktea/discord.web/network/members
+[stars-shield]: https://img.shields.io/github/stars/quiktea/discord.web.svg?style=for-the-badge
+[stars-url]: https://github.com/quiktea/discord.web/stargazers
+[issues-shield]: https://img.shields.io/github/issues/quiktea/discord.web.svg?style=for-the-badge
+[issues-url]: https://github.com/quiktea/discord.web/issues
+[license-shield]: https://img.shields.io/github/license/quiktea/discord.web.svg?style=for-the-badge
+[license-url]: https://github.com/quiktea/discord.web/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://linkedin.com/in/quiktea
 [product-screenshot]: .github/screenshot.png
