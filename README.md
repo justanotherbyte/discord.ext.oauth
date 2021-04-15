@@ -170,7 +170,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Discord - [discord.web](https://discord.gg/JmhWrK99GS) - https://discord.gg/JmhWrK99GS
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/quiktea/discord.web)
+Project Link: [https://github.com/quiktea/discord.web](https://github.com/quiktea/discord.web)
 
 
 
