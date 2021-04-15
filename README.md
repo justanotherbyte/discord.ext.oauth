@@ -28,7 +28,7 @@
 <br />
 <p align="center">
   <a href="#">
-    <img src=".github/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://media.discordapp.net/attachments/773312837623218247/832326208871464990/blurple39.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Discord.Web</h3>
