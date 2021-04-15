@@ -11,7 +11,7 @@ DESCRIPTION = 'An async wrapper for the Discord Oauth2 API'
 
 # Setting up
 setup(
-    name="discord-web",
+    name="discord.web",
     version="0.0.1a",
     author="quiktea",
     author_email="wishymovies@gmail.com",
