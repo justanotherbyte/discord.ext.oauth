@@ -115,7 +115,7 @@ Installing the `discord.web` library is a breeze. Here we list both ways of inst
   pip install discord.web
   ```
   ```sh
-  pip install git+https://github.com/quiktea/discord.web/
+  pip install git+https://github.com/muunie/discord.web/
   ```
 
 
@@ -172,7 +172,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Discord - [discord.web](https://discord.gg/JmhWrK99GS) - https://discord.gg/JmhWrK99GS
 
-Project Link: [https://github.com/quiktea/discord.web](https://github.com/quiktea/discord.web)
+Project Link: [https://github.com/quiktea/discord.web](https://github.com/muunie/discord.web)
 
 
 
