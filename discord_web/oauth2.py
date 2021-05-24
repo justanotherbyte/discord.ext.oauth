@@ -13,8 +13,8 @@ class Oauth2Client:
         self.client_secret = client_secret
         self.redirect_uri = redirect_uri
         self.__session__ = aiohttp.ClientSession(headers = {'Content-Type': 'application/x-www-form-urlencoded'}, raise_for_status=True)
-        self.oauth2_endpoint = 'https://discord.com/api/v8/oauth2/token'
-        self.base_member_endpoint = "https://discord.com/api/v8/users/@me"
+        self.oauth2_endpoint = 'https://discord.com/api/v9/oauth2/token'
+        self.base_member_endpoint = "https://discord.com/api/v9/users/@me"
         self.scopes = " ".join(scopes)
 
 
