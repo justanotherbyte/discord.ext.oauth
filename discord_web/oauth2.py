@@ -13,8 +13,8 @@ class Oauth2Client:
         self.client_secret = client_secret
         self.redirect_uri = redirect_uri
         self.__session__ = aiohttp.ClientSession(headers = {'Content-Type': 'application/x-www-form-urlencoded'}, raise_for_status=True)
-        self.oauth2_endpoint = 'https://discord.com/api/v8/oauth2/token'
-        self.base_member_endpoint = "https://discord.com/api/v8/users/@me"
+        self.oauth2_endpoint = 'https://discord.com/api/v9/oauth2/token'
+        self.base_member_endpoint = "https://discord.com/api/v9/users/@me"
         self.scopes = " ".join(scopes)
 
 
@@ -29,15 +29,13 @@ class Oauth2Client:
         }
         async with self.__session__.post(self.oauth2_endpoint, data = exchange_data) as response:
             data = await response.json()
-            token_obj = abc.AccessToken(data)
-            return token_obj
+            return abc.AccessToken(data)
 
     async def fetch_member(self, access_token : str) -> abc.Oauth2Member:
         headers = {"Authorization" : "Bearer {}".format(access_token)}
         async with self.__session__.get(self.base_member_endpoint, headers = headers) as user_response:
             data = await user_response.json()
-            member_obj = abc.Oauth2Member(data, access_token)
-            return member_obj
+            return abc.Oauth2Member(data, access_token)
 
     async def refresh_token(self, refresh_token : str) -> abc.AccessToken:
         exchange_data = {
@@ -48,8 +46,7 @@ class Oauth2Client:
         }
         async with self.__session__.post(self.oauth2_endpoint, data = exchange_data) as response:
             data = await response.json()
-            token_obj = abc.AccessToken(data)
-            return token_obj
+            return abc.AccessToken(data)
 
     
 
