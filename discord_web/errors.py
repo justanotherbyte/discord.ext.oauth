@@ -1,11 +1,9 @@
-
-
 class InvalidClient(Exception):
     pass
 
 
 class InvalidRequest(Exception):
-    def __init__(self, error : str):
+    def __init__(self, error: str):
         self.error = error
 
     def __str__(self) -> str:
@@ -14,6 +12,3 @@ class InvalidRequest(Exception):
 
 class Unauthorized(Exception):
     pass
-
-
-

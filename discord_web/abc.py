@@ -5,7 +5,7 @@ from . import checks
 
 
 class AccessToken:
-    def __init__(self, token_response : dict):
+    def __init__(self, token_response: dict):
         self._token_response = token_response
 
     def __str__(self):
@@ -30,9 +30,10 @@ class AccessToken:
     @property
     def scope(self) -> str:
         return self._token_response["scope"]
-    
+
+
 class Oauth2Guild:
-    def __init__(self, payload_data : dict):
+    def __init__(self, payload_data: dict):
         self._payload = payload_data
 
     def __str__(self) -> str:
@@ -54,7 +55,7 @@ class Oauth2Guild:
     @property
     def is_fetched_member_owner(self) -> bool:
         return self._payload["owner"]
-    
+
     @property
     def fetched_member_permissions(self) -> Permissions:
         return Permissions(int(self._payload["permissions"]))
@@ -63,20 +64,31 @@ class Oauth2Guild:
     def features(self) -> bool:
         return self._payload["features"]
 
+
 class Oauth2Member:
-    def __init__(self, member_payload : dict, access_token : str, session : aiohttp.ClientSession = None):
+    def __init__(
+        self,
+        member_payload: dict,
+        access_token: str,
+        session: aiohttp.ClientSession = None,
+    ):
         self._payload = member_payload
-        self.__session__ = session or aiohttp.ClientSession(headers = {'Content-Type': 'application/x-www-form-urlencoded'})
+        self.__session__ = session or aiohttp.ClientSession(
+            headers={"Content-Type": "application/x-www-form-urlencoded"}
+        )
         self.__token__ = access_token
-        
 
     def __str__(self):
         return "{}#{}".format(self.username, self.discriminator)
 
-    
-    async def fetch_guilds(self, access_token : Optional[str] = None) -> List[Oauth2Guild]:
+    async def fetch_guilds(
+        self, access_token: Optional[str] = None
+    ) -> List[Oauth2Guild]:
         access_token = access_token or self.__token__
-        async with self.__session__.get("https://discord.com/api/v8/users/@me/guilds", headers = {"Authorization" : "Bearer {}".format(access_token)}) as response:
+        async with self.__session__.get(
+            "https://discord.com/api/v8/users/@me/guilds",
+            headers={"Authorization": "Bearer {}".format(access_token)},
+        ) as response:
             data = await response.json()
             guilds = []
             for guild in data:
@@ -84,8 +96,6 @@ class Oauth2Member:
                 guilds.append(guild_obj)
 
             return guilds
-
-
 
     @property
     def id(self) -> int:
@@ -128,12 +138,3 @@ class Oauth2Member:
     @property
     def verified(self) -> bool:
         return self._payload["verified"]
-
-
-    
-
-
-    
-
-
-    
