@@ -1,3 +1,8 @@
+from typing import Union
+
+from .http import HTTPClient, Route
+from .models import AccessTokenResponse
+
 class AccessTokenResponse:
     def __init__(self, *, data: dict):
         self._data = data
@@ -8,8 +13,10 @@ class AccessTokenResponse:
         self.scope: str = self._data.get("scope")
 
 class User:
-    def __init__(self, *, data: dict, access_token: str):
+    def __init__(self, http: HTTPClient, *, data: dict, acr: AccessTokenResponse):
         self._data = data
+        self._http = http
+        self._acr: AccessTokenResponse = acr
 
         self._avatar_hash = self._data.get("avatar")
         self._avatar_format = "gif" if self._avatar_hash.startswith("a") else "png"
@@ -21,5 +28,22 @@ class User:
         self.mfa_enabled: bool = self._data.get("mfa_enabled")
         self.email: str = self._data.get("email")
         self.verified: bool = self._data.get("verified")
-        self.access_token: str = access_token
+        self.access_token: str = self._acr.token
+        self.refresh_token: str = self._acr.refresh_token
+
+    async def refresh(self) -> AccessTokenResponse:
+        refresh_token = self.refresh_token
+        route = Route("POST", "/oauth2/token")
+        post_data = {
+            "client_id": self._id,
+            "client_secret": self._auth,
+            "grant_type": "refresh_token",
+            "code": refresh_token
+        }
+        request_data = await self._http.request(route, data=post_data)
+        token_resp = AccessTokenResponse(data=request_data)
+        self.refresh_token = token_resp.refresh_token
+        self.access_token = token_resp.token
+        self._acr = token_resp
+        return token_resp
 

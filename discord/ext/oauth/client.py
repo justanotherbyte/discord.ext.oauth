@@ -6,6 +6,9 @@ from typing import Optional, Union, List
 from .http import Route, HTTPClient
 from .models import AccessTokenResponse, User
 
+__all__: tuple = (
+    "OAuth2Client",
+)
 
 class OAuth2Client:
     def __init__(
@@ -40,17 +43,32 @@ class OAuth2Client:
         token_resp = AccessTokenResponse(data=request_data)
         return token_resp
 
-    async def fetch_user(self, access_token: Union[str, AccessTokenResponse]) -> User:
-        access_token = (
-            access_token if isinstance(access_token, str) else access_token.token
+    async def refresh_token(self, refresh_token: Union[str, AccessTokenResponse]) -> AccessTokenResponse:
+        refresh_token = (
+            refresh_token if isinstance(refresh_token, str) else refresh_token.token
         )
+        route = Route("POST", "/oauth2/token")
+        post_data = {
+            "client_id": self._id,
+            "client_secret": self._auth,
+            "grant_type": "refresh_token",
+            "code": refresh_token
+        }
+        request_data = await self.http.request(route, data=post_data)
+        token_resp = AccessTokenResponse(data=request_data)
+        return token_resp
+
+    async def fetch_user(self, access_token_response: AccessTokenResponse) -> User:
+        access_token = access_token_response.token
         route = Route("GET", "/users/@me")
         headers = {"Authorization": "Bearer {}".format(access_token)}
         resp = await self.http.request(route, headers=headers)
-        user = User(data = resp, access_token = access_token)
+        user = User(data = resp, acr = access_token_response)
         self._user_cache.update(user.id, user)
         return user
 
     def get_user(self, id: int) -> Optional[User]:
         user = self._user_cache.get(id)
         return user
+
+    

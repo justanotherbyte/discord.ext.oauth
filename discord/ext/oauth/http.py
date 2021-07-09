@@ -5,6 +5,11 @@ from typing import Optional
 from .errors import HTTPException
 
 
+__all__: tuple = (
+    "Route",
+    "HTTPClient"
+)
+
 class Route:
     BASE = "https://discord.com/api/v9"
 
