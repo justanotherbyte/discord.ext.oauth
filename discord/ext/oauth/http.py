@@ -39,7 +39,7 @@ class HTTPClient:
 
         async with self.__session.request(route.method, route.url, **kwargs) as resp:
             json = await resp.json()
-            if 300 > resp.status >= 200:
+            if 200 <= resp.status < 300:
                 return json
             else:
                 raise HTTPException(resp, json=json)
