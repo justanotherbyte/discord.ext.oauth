@@ -27,9 +27,7 @@ class HTTPClient:
 
         headers = kwargs.pop("headers", {})
 
-        headers[
-            "Content-Type"
-        ] = "application/x-www-form-urlencoded"  # the discord OAuth2 api requires this header to be set to this
+        headers["Content-Type"] = "application/x-www-form-urlencoded"  # the discord OAuth2 api requires this header to be set to this
         kwargs["headers"] = headers
 
         async with self.__session.request(route.method, route.url, **kwargs) as resp:
