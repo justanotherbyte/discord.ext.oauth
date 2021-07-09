@@ -1,12 +1,15 @@
-from typing import List
+from __future__ import annotations
+
+from typing import List, TYPE_CHECKING
 
 from .http import HTTPClient, Route
-from .guild import Guild
-from .token import AccessTokenResponse
+
+if TYPE_CHECKING:
+    from .guild import Guild
+    from .token import AccessTokenResponse
 
 
-
-
+__all__: tuple = ("User",)
 
 
 class User:
@@ -20,7 +23,9 @@ class User:
 
         self.id: int = int(self._data.get("id"))
         self.name: str = self._data.get("name")
-        self.avatar_url: str = "https://cdn.discordapp.com/avatars/{0.id}/{0._avatar_hash}.{0._avatar_format}".format(self)
+        self.avatar_url: str = "https://cdn.discordapp.com/avatars/{0.id}/{0._avatar_hash}.{0._avatar_format}".format(
+            self
+        )
         self.discriminator: int = int(self._data.get("discriminator"))
         self.mfa_enabled: bool = self._data.get("mfa_enabled")
         self.email: str = self._data.get("email")
@@ -28,13 +33,15 @@ class User:
         self.access_token: str = self._acr.token
         self.refresh_token: str = self._acr.refresh_token
 
-        self.guilds: List[Guild] = [] # this is filled in when fetch_guilds is called
+        self.guilds: List[Guild] = []  # this is filled in when fetch_guilds is called
 
     def __str__(self) -> str:
         return "{0.id}#{0.discriminator}".format(self)
 
     def __repr__(self) -> str:
-        return "<User id={0.id} name={0.name} discriminator={0.discriminator} verified={0.verified}>".format(self)
+        return "<User id={0.id} name={0.name} discriminator={0.discriminator} verified={0.verified}>".format(
+            self
+        )
 
     async def refresh(self) -> AccessTokenResponse:
         refresh_token = self.refresh_token
@@ -43,7 +50,7 @@ class User:
             "client_id": self._http._state_info["client_id"],
             "client_secret": self._http._state_info["client_secret"],
             "grant_type": "refresh_token",
-            "refresh_token": refresh_token
+            "refresh_token": refresh_token,
         }
         request_data = await self._http.request(route, data=post_data)
         token_resp = AccessTokenResponse(data=request_data)
@@ -55,18 +62,13 @@ class User:
     async def fetch_guilds(self, *, refresh: bool = True) -> List[Guild]:
         if not refresh and self.guilds:
             return self.guilds
-        
+
         route = Route("GET", "/users/@me/guilds")
-        headers = {
-            "Authorization": "Bearer {}".format(self.access_token)
-        }
-        resp = await self._http.request(route, headers = headers)
+        headers = {"Authorization": "Bearer {}".format(self.access_token)}
+        resp = await self._http.request(route, headers=headers)
         self.guilds = []
         for array in resp:
-            guild = Guild(data = array, user = self)
+            guild = Guild(data=array, user=self)
             self.guilds.append(guild)
-        
+
         return self.guilds
-        
-
-

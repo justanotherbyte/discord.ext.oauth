@@ -5,10 +5,8 @@ from typing import Optional
 from .errors import HTTPException
 
 
-__all__: tuple = (
-    "Route",
-    "HTTPClient"
-)
+__all__: tuple = ("Route", "HTTPClient")
+
 
 class Route:
     BASE = "https://discord.com/api/v9"
@@ -21,7 +19,7 @@ class Route:
 class HTTPClient:
     def __init__(self):
         self.__session = None  # filled in later
-        self._state_info = {} # client fills this
+        self._state_info = {}  # client fills this
 
     async def _create_session(self) -> aiohttp.ClientSession:
         self.__session = aiohttp.ClientSession()
@@ -41,7 +39,7 @@ class HTTPClient:
             if 300 > resp.status >= 200:
                 return json
             else:
-                raise HTTPException(resp, json = json)
+                raise HTTPException(resp, json=json)
 
     async def close(self):
         await self.__session.close()
