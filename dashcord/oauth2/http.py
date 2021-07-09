@@ -6,7 +6,7 @@ from .errors import HTTPException
 
 
 class Route:
-    BASE = "https://discord.com/api/v8"
+    BASE = "https://discord.com/api/v9"
 
     def __init__(self, method: str, endpoint: str, **params):
         self.url = self.BASE + endpoint.format(**params)
