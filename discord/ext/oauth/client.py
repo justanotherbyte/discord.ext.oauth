@@ -48,7 +48,6 @@ class OAuth2Client:
         }
         if self._scopes is not None:
             post_data["scope"] = self._scopes
-        print(post_data)
         request_data = await self.http.request(route, data=post_data)
         token_resp = AccessTokenResponse(data=request_data)
         return token_resp
