@@ -4,7 +4,9 @@ import weakref
 from typing import Optional, Union, List
 
 from .http import Route, HTTPClient
-from .models import AccessTokenResponse, User
+from .token import AccessTokenResponse
+from .user import User
+
 
 __all__: tuple = (
     "OAuth2Client",
@@ -25,10 +27,14 @@ class OAuth2Client:
         self._scopes = " ".join(scopes) if scopes is not None else None
 
         self.http = HTTPClient()
-        self.cleanup = self.close # an alias for close
+        self.http._state_info.update({
+            "client_id": self._id,
+            "client_secret": self._auth,
+            "redirect_uri": self._redirect,
+            "scopes": self._scopes
+        })
 
         self._user_cache = weakref.WeakValueDictionary()
-
         
 
     async def exchange_code(self, code: str) -> AccessTokenResponse:
@@ -42,6 +48,7 @@ class OAuth2Client:
         }
         if self._scopes is not None:
             post_data["scope"] = self._scopes
+        print(post_data)
         request_data = await self.http.request(route, data=post_data)
         token_resp = AccessTokenResponse(data=request_data)
         return token_resp
@@ -55,7 +62,7 @@ class OAuth2Client:
             "client_id": self._id,
             "client_secret": self._auth,
             "grant_type": "refresh_token",
-            "code": refresh_token
+            "refresh_token": refresh_token
         }
         request_data = await self.http.request(route, data=post_data)
         token_resp = AccessTokenResponse(data=request_data)
@@ -66,8 +73,10 @@ class OAuth2Client:
         route = Route("GET", "/users/@me")
         headers = {"Authorization": "Bearer {}".format(access_token)}
         resp = await self.http.request(route, headers=headers)
-        user = User(data = resp, acr = access_token_response)
-        self._user_cache.update(user.id, user)
+        user = User(http = self.http, data = resp, acr = access_token_response)
+        self._user_cache.update({
+            user.id: user
+        })
         return user
 
     def get_user(self, id: int) -> Optional[User]:

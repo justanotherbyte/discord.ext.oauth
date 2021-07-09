@@ -1,13 +1,13 @@
 from aiohttp import ClientResponse
 
 
-class DashcordException(Exception):
+class ExtOauthException(Exception):
     """
     The base exception the library always raises
     """
 
 
-class HTTPException(DashcordException):
+class HTTPException(ExtOauthException):
     """
     The error that is raised whenever an http error occurs
     """

@@ -21,6 +21,7 @@ class Route:
 class HTTPClient:
     def __init__(self):
         self.__session = None  # filled in later
+        self._state_info = {} # client fills this
 
     async def _create_session(self) -> aiohttp.ClientSession:
         self.__session = aiohttp.ClientSession()

@@ -1,18 +1,16 @@
-from typing import Union
+from typing import List
 
 from .http import HTTPClient, Route
+from .guild import Guild
+from .token import AccessTokenResponse
 
-class AccessTokenResponse:
-    def __init__(self, *, data: dict):
-        self._data = data
-        self.token = self._data.get("access_token")
-        self.token_type: str = self._data.get("token_type")
-        self.expires_in = self._data.get("expires_in")
-        self.refresh_token: str = self._data.get("refresh_token")
-        self.scope: str = self._data.get("scope")
+
+
+
+
 
 class User:
-    def __init__(self, http: HTTPClient, *, data: dict, acr: AccessTokenResponse):
+    def __init__(self, *, http: HTTPClient, data: dict, acr: AccessTokenResponse):
         self._data = data
         self._http = http
         self._acr: AccessTokenResponse = acr
@@ -30,6 +28,8 @@ class User:
         self.access_token: str = self._acr.token
         self.refresh_token: str = self._acr.refresh_token
 
+        self.guilds: List[Guild] = [] # this is filled in when fetch_guilds is called
+
     def __str__(self) -> str:
         return "{0.id}#{0.discriminator}".format(self)
 
@@ -40,10 +40,10 @@ class User:
         refresh_token = self.refresh_token
         route = Route("POST", "/oauth2/token")
         post_data = {
-            "client_id": self._id,
-            "client_secret": self._auth,
+            "client_id": self._http._state_info["client_id"],
+            "client_secret": self._http._state_info["client_secret"],
             "grant_type": "refresh_token",
-            "code": refresh_token
+            "refresh_token": refresh_token
         }
         request_data = await self._http.request(route, data=post_data)
         token_resp = AccessTokenResponse(data=request_data)
@@ -51,4 +51,22 @@ class User:
         self.access_token = token_resp.token
         self._acr = token_resp
         return token_resp
+
+    async def fetch_guilds(self, *, refresh: bool = True) -> List[Guild]:
+        if not refresh and self.guilds:
+            return self.guilds
+        
+        route = Route("GET", "/users/@me/guilds")
+        headers = {
+            "Authorization": "Bearer {}".format(self.access_token)
+        }
+        resp = await self._http.request(route, headers = headers)
+        self.guilds = []
+        for array in resp:
+            guild = Guild(data = array, user = self)
+            self.guilds.append(guild)
+        
+        return self.guilds
+        
+
 
