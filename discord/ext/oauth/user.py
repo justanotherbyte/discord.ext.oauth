@@ -9,7 +9,9 @@ if TYPE_CHECKING:
     from .token import AccessTokenResponse
 
 
-__all__: tuple = ("User",)
+__all__: tuple = (
+    "User",
+)
 
 
 class User:

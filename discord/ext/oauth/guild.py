@@ -5,7 +5,9 @@ from typing import List, TYPE_CHECKING
 if TYPE_CHECKING:
     from .user import User
 
-__all__: tuple = ("Guild",)
+__all__: tuple = (
+    "Guild",
+)
 
 
 class Guild:

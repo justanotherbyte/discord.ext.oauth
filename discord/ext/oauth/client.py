@@ -8,7 +8,9 @@ from .token import AccessTokenResponse
 from .user import User
 
 
-__all__: tuple = ("OAuth2Client",)
+__all__: tuple = (
+    "OAuth2Client",
+)
 
 
 class OAuth2Client:
