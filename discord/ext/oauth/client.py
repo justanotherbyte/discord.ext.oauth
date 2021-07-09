@@ -1,4 +1,3 @@
-import asyncio
 import weakref
 
 from typing import Optional, Union, List
