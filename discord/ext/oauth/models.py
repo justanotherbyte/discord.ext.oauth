@@ -1,7 +1,6 @@
 from typing import Union
 
 from .http import HTTPClient, Route
-from .models import AccessTokenResponse
 
 class AccessTokenResponse:
     def __init__(self, *, data: dict):
@@ -30,6 +29,12 @@ class User:
         self.verified: bool = self._data.get("verified")
         self.access_token: str = self._acr.token
         self.refresh_token: str = self._acr.refresh_token
+
+    def __str__(self) -> str:
+        return "{0.id}#{0.discriminator}".format(self)
+
+    def __repr__(self) -> str:
+        return "<User id={0.id} name={0.name} discriminator={0.discriminator} verified={0.verified}>".format(self)
 
     async def refresh(self) -> AccessTokenResponse:
         refresh_token = self.refresh_token

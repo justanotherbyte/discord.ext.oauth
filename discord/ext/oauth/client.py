@@ -17,16 +17,19 @@ class OAuth2Client:
         client_id: int,
         client_secret: str,
         redirect_uri: str,
-        loop: Optional[asyncio.AbstractEventLoop] = None,
         scopes: Optional[List[str]] = None
     ):
         self._id = client_id
         self._auth = client_secret
         self._redirect = redirect_uri
         self._scopes = " ".join(scopes) if scopes is not None else None
+
         self.http = HTTPClient()
-        self.loop = loop if loop is not None else asyncio.get_event_loop()
+        self.cleanup = self.close # an alias for close
+
         self._user_cache = weakref.WeakValueDictionary()
+
+        
 
     async def exchange_code(self, code: str) -> AccessTokenResponse:
         route = Route("POST", "/oauth2/token")
@@ -70,5 +73,10 @@ class OAuth2Client:
     def get_user(self, id: int) -> Optional[User]:
         user = self._user_cache.get(id)
         return user
+
+    async def close(self):
+        await self.http.close()
+
+
 
     
