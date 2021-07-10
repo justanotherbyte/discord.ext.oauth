@@ -1,4 +1,5 @@
 sphinx
 karma_sphinx_theme
 sphinxcontrib-trio
-git+https://github.com/moanie/discord.ext.oauth/
+myst-parser
+discord-ext-oauth

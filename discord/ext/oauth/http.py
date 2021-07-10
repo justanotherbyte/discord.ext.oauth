@@ -1,7 +1,5 @@
 import aiohttp
 
-from typing import Optional
-
 from .errors import HTTPException
 
 
