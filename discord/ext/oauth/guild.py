@@ -12,6 +12,13 @@ __all__: tuple = (
 
 class Guild:
     def __init__(self, *, data: dict, user: User):
+        """A class representing a PartialGuild object sent by the OAuth2 API. This is not meant to be manually created.
+
+        :param data: The raw payload returned by the api
+        :type data: dict
+        :param user: The user assigned to this guild object
+        :type user: User
+        """
         self._data = data
 
         self._icon_hash = self._data.get("icon")
@@ -26,3 +33,4 @@ class Guild:
         )
         self.is_user_owner: bool = self._data.get("owner")
         self.features: List[str] = self._data.get("features")
+

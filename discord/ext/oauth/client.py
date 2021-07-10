@@ -21,6 +21,17 @@ class OAuth2Client:
         redirect_uri: str,
         scopes: Optional[List[str]] = None
     ):
+        """A class representing a client interacting with the discord OAuth2 API.
+
+        :param client_id: The OAuth application's client_id
+        :type client_id: int
+        :param client_secret: The OAuth application's client_secret
+        :type client_secret: str
+        :param redirect_uri: The OAuth application's redirect_uri. Must be from one of the configured uri's on the developer portal
+        :type redirect_uri: str
+        :param scopes: A list of OAuth2 scopes, defaults to None
+        :type scopes: Optional[List[str]], optional
+        """
         self._id = client_id
         self._auth = client_secret
         self._redirect = redirect_uri

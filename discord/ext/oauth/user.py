@@ -16,6 +16,15 @@ __all__: tuple = (
 
 class User:
     def __init__(self, *, http: HTTPClient, data: dict, acr: AccessTokenResponse):
+        """A class representing a user object, containing information from the OAuth2 API.
+
+        :param http: A client sending and receiving http data to and from the api
+        :type http: HTTPClient
+        :param data: The raw user payload send by the api
+        :type data: dict
+        :param acr: The AccessTokenResponse object that authorized us to get this User object
+        :type acr: AccessTokenResponse
+        """
         self._data = data
         self._http = http
         self._acr: AccessTokenResponse = acr
