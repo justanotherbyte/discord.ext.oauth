@@ -15,6 +15,8 @@ An asynchronous OAuth2 extension for discord.py.
 </sup>
 </p>
 
+[![Documentation Status](https://readthedocs.org/projects/discordextoauth/badge/?version=latest)](https://discordextoauth.readthedocs.io/en/latest/?badge=latest)
+
 ***
 ## Installing the extension
 > Installing the stable version:
