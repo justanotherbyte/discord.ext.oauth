@@ -1,2 +1,3 @@
 sphinx
 karma_sphinx_theme
+sphinxcontrib-trio
