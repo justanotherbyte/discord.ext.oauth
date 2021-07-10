@@ -13,6 +13,8 @@ __all__: tuple = (
 
 
 class OAuth2Client:
+    """A class representing a client interacting with the discord OAuth2 API.
+    """
     def __init__(
         self,
         *,

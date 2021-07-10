@@ -1,0 +1,61 @@
+oauth package
+=============
+
+Submodules
+----------
+
+oauth.client module
+-------------------
+
+.. automodule:: oauth.client
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+oauth.errors module
+-------------------
+
+.. automodule:: oauth.errors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+oauth.guild module
+------------------
+
+.. automodule:: oauth.guild
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+oauth.http module
+-----------------
+
+.. automodule:: oauth.http
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+oauth.token module
+------------------
+
+.. automodule:: oauth.token
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+oauth.user module
+-----------------
+
+.. automodule:: oauth.user
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: oauth
+   :members:
+   :undoc-members:
+   :show-inheritance:

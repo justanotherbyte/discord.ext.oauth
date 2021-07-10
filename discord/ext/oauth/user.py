@@ -15,6 +15,8 @@ __all__: tuple = (
 
 
 class User:
+    """A class representing a user object, containing information from the OAuth2 API.
+    """
     def __init__(self, *, http: HTTPClient, data: dict, acr: AccessTokenResponse):
         """A class representing a user object, containing information from the OAuth2 API.
 
