@@ -53,6 +53,11 @@ class User:
         )
 
     async def refresh(self) -> AccessTokenResponse:
+        """Refreshes the access token for the user and returns a fresh access token response.
+
+        :return: A class holding information about the new access token
+        :rtype: AccessTokenResponse
+        """
         refresh_token = self.refresh_token
         route = Route("POST", "/oauth2/token")
         post_data = {
@@ -69,6 +74,13 @@ class User:
         return token_resp
 
     async def fetch_guilds(self, *, refresh: bool = True) -> List[Guild]:
+        """Makes an api call to fetch the guilds the user is in. Can fill a normal dictionary cache.
+
+        :param refresh: Whether or not to refresh the guild cache attached to this user object. If false, returns the cached guilds, defaults to True
+        :type refresh: bool, optional
+        :return: A List of Guild objects either from cache or returned from the api call 
+        :rtype: List[Guild]
+        """
         if not refresh and self.guilds:
             return self.guilds
 

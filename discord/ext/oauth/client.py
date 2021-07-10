@@ -50,6 +50,13 @@ class OAuth2Client:
         self._user_cache = weakref.WeakValueDictionary()
 
     async def exchange_code(self, code: str) -> AccessTokenResponse:
+        """Exchanges the code you receive from the OAuth2 redirect.
+
+        :param code: The code you've received from the OAuth2 redirect
+        :type code: str
+        :return: A response class containing information about the access token
+        :rtype: AccessTokenResponse
+        """
         route = Route("POST", "/oauth2/token")
         post_data = {
             "client_id": self._id,
@@ -64,9 +71,14 @@ class OAuth2Client:
         token_resp = AccessTokenResponse(data=request_data)
         return token_resp
 
-    async def refresh_token(
-        self, refresh_token: Union[str, AccessTokenResponse]
-    ) -> AccessTokenResponse:
+    async def refresh_token(self, refresh_token: Union[str, AccessTokenResponse]) -> AccessTokenResponse:
+        """Refreshes an access token. Takes either a string or an AccessTokenResponse.
+
+        :param refresh_token: The refresh token you received when exchanging a redirect code
+        :type refresh_token: Union[str, AccessTokenResponse]
+        :return: A new access token response containg information about the refreshed access token
+        :rtype: AccessTokenResponse
+        """
         refresh_token = (
             refresh_token if isinstance(refresh_token, str) else refresh_token.token
         )
@@ -82,6 +94,13 @@ class OAuth2Client:
         return token_resp
 
     async def fetch_user(self, access_token_response: AccessTokenResponse) -> User:
+        """Makes an api call to fetch a user using their access token.
+
+        :param access_token_response: A class holding information about an access token
+        :type access_token_response: AccessTokenResponse
+        :return: Returns a User object holding information about the select user
+        :rtype: User
+        """
         access_token = access_token_response.token
         route = Route("GET", "/users/@me")
         headers = {"Authorization": "Bearer {}".format(access_token)}
@@ -91,8 +110,18 @@ class OAuth2Client:
         return user
 
     def get_user(self, id: int) -> Optional[User]:
+        """Gets a user from the cache. The cache is a WeakValueDictionary, so objects may be removed without notice.
+
+        :param id: The id of the user you want to get
+        :type id: int
+        :return: A possible user object. Returns None if no User is found in cache.
+        :rtype: Optional[User]
+        """
         user = self._user_cache.get(id)
         return user
 
     async def close(self):
+        """Closes and performs cleanup operations on the client, such as clearing its cache.
+        """
+        self._user_cache.clear()
         await self.http.close()
