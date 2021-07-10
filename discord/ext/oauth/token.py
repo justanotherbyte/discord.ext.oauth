@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 class AccessTokenResponse:
     def __init__(self, *, data: dict):
         self._data = data
@@ -6,3 +8,6 @@ class AccessTokenResponse:
         self.expires_in = self._data.get("expires_in")
         self.refresh_token: str = self._data.get("refresh_token")
         self.scope: str = self._data.get("scope")
+        self.expires_in: int = self._data.get("expires_in")
+        self.expires_at: datetime = datetime.now() + timedelta(seconds = self.expires_in)
+        
