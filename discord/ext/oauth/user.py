@@ -15,18 +15,31 @@ __all__: tuple = (
 
 
 class User:
-    """A class representing a user object, containing information from the OAuth2 API.
+    """
+    A class representing a user object, containing information from the OAuth2 API.
+
+    Attributes
+    ---------
+    id: int
+        The id of the user
+    name: str
+        The username of the user
+    avatar_url: str
+        The asset url for the user's avatar
+    discriminator: str
+        The user's discriminator
+    mfa_enabled: bool
+        Whether the user has multi-factor authentication (2fa usually) enabled on their account
+    email: Optional[str]
+        The user's email. Can be None if the user has no email, or you do not have the email scope selected
+    verified: bool
+        Whether the user has a verified account
+    access_token: str
+        The access token used to get this user object
+    refresh_token: str
+        The refresh token to refresh the access token
     """
     def __init__(self, *, http: HTTPClient, data: dict, acr: AccessTokenResponse):
-        """A class representing a user object, containing information from the OAuth2 API.
-
-        :param http: A client sending and receiving http data to and from the api
-        :type http: HTTPClient
-        :param data: The raw user payload send by the api
-        :type data: dict
-        :param acr: The AccessTokenResponse object that authorized us to get this User object
-        :type acr: AccessTokenResponse
-        """
         self._data = data
         self._http = http
         self._acr: AccessTokenResponse = acr
