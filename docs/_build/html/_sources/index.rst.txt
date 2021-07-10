@@ -10,6 +10,7 @@ Welcome to discord-ext-oauth's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   modules/getting-started.rst
    modules/client.rst
    modules/guild.rst
    modules/token.rst

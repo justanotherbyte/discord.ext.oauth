@@ -3,3 +3,4 @@ pyvenv.cfg
 Scripts/
 Lib/
 __pycache__/
+.vscode/
