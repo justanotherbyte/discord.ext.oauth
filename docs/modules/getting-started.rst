@@ -18,7 +18,7 @@ Example Usage
 
 
     async def main():
-        resp = await client.exchange_code("redirect_uri_here")
+        resp = await client.exchange_code("redirect_code_here")
         user = await client.fetch_user(resp)
         print(f"User ID: {user.id}")
         print(f"User Avatar URL: {user.avatar_url}")
