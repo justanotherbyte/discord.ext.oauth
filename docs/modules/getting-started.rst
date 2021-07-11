@@ -29,6 +29,6 @@ Example Usage
 
 .. code-block:: guess
 
->>> User ID: 691406006277898302
->>> User Avatar URL: https://cdn.discordapp.com/avatars/691406006277898302/5c8f69a903a8c5e34f93fe6ece5348c7.png 
+    >>> User ID: 691406006277898302
+    >>> User Avatar URL: https://cdn.discordapp.com/avatars/691406006277898302/5c8f69a903a8c5e34f93fe6ece5348c7.png 
 
