@@ -27,10 +27,8 @@ Example Usage
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
 
-.. code-block:: shell
+.. code-block:: guess
 
-Output
-
-User ID: 691406006277898302
-User Avatar URL: https://cdn.discordapp.com/avatars/691406006277898302/5c8f69a903a8c5e34f93fe6ece5348c7.png 
+>>> User ID: 691406006277898302
+>>> User Avatar URL: https://cdn.discordapp.com/avatars/691406006277898302/5c8f69a903a8c5e34f93fe6ece5348c7.png 
 
