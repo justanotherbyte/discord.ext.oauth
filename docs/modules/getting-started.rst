@@ -5,6 +5,7 @@ Example Usage
 =============
 
 .. code-block:: python
+
     import asyncio
     from discord.ext import oauth
 
@@ -27,6 +28,7 @@ Example Usage
     loop.run_until_complete(main())
 
 .. code-block:: shell
+
 Output
 
 User ID: 691406006277898302
