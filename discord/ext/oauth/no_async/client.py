@@ -2,9 +2,11 @@ import weakref
 
 from typing import Optional, Union, List
 
+from .user import NoAsyncUser
+
 from .http import Route, HTTPClient
 from ..token import AccessTokenResponse
-from ..user import User
+
 
 
 __all__: tuple = (
@@ -96,29 +98,29 @@ class NoAsyncOAuth2Client:
         token_resp = AccessTokenResponse(data=request_data)
         return token_resp
 
-    def fetch_user(self, access_token_response: AccessTokenResponse) -> User:
+    def fetch_user(self, access_token_response: AccessTokenResponse) -> NoAsyncUser:
         """Makes an api call to fetch a user using their access token.
 
         :param access_token_response: A class holding information about an access token
         :type access_token_response: AccessTokenResponse
-        :return: Returns a User object holding information about the select user
-        :rtype: User
+        :return: Returns a NoAsyncUser object holding information about the select user
+        :rtype: NoAsyncUser
         """
         access_token = access_token_response.token
         route = Route("GET", "/users/@me")
         headers = {"Authorization": "Bearer {}".format(access_token)}
         resp = self.http.request(route, headers=headers)
-        user = User(http=self.http, data=resp, acr=access_token_response)
+        user = NoAsyncUser(http=self.http, data=resp, acr=access_token_response)
         self._user_cache.update({user.id: user})
         return user
 
-    def get_user(self, id: int) -> Optional[User]:
+    def get_user(self, id: int) -> Optional[NoAsyncUser]:
         """Gets a user from the cache. The cache is a WeakValueDictionary, so objects may be removed without notice.
 
         :param id: The id of the user you want to get
         :type id: int
         :return: A possible user object. Returns None if no User is found in cache.
-        :rtype: Optional[User]
+        :rtype: Optional[NoAsyncUser]
         """
         user = self._user_cache.get(id)
         return user
