@@ -27,7 +27,7 @@ class HTTPClient:
         return self.__session
 
     def request(self, route: Route, **kwargs) -> dict:
-        if self.__session is None or self.__session.closed is True:
+        if self.__session is None:
             self._create_session()
 
         headers = kwargs.pop("headers", {})
