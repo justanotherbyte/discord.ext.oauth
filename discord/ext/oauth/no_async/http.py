@@ -37,7 +37,7 @@ class HTTPClient:
 
         resp = self.__session.request(route.method, route.url, **kwargs)
         json = resp.json()
-        if 200 <= resp.status < 300:
+        if 200 <= resp.status_code < 300:
             return json
         else:
             raise HTTPException(resp, json=json)
