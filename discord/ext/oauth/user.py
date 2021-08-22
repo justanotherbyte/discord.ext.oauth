@@ -60,7 +60,7 @@ class User:
         self.guilds: List[Guild] = []  # this is filled in when fetch_guilds is called
 
     def __str__(self) -> str:
-        return "{0.id}#{0.discriminator}".format(self)
+        return "{0.name}#{0.discriminator}".format(self)
 
     def __repr__(self) -> str:
         return "<User id={0.id} name={0.name} discriminator={0.discriminator} verified={0.verified}>".format(
