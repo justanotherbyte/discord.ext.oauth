@@ -17,7 +17,7 @@ setup(
     author='moanie',
     python_requires='>=3.7.0',
     url='https://github.com/moanie/discord.ext.oauth',
-    version="0.2.6",
+    version="0.2.7",
     packages=[
         "discord/ext/oauth",
         "discord/ext/oauth/no_async"

@@ -3,9 +3,9 @@ from __future__ import annotations
 from typing import List, TYPE_CHECKING
 
 from .http import HTTPClient, Route
+from .guild import Guild
 
 if TYPE_CHECKING:
-    from .guild import Guild
     from .token import AccessTokenResponse
 
 
