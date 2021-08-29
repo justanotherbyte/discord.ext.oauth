@@ -44,11 +44,11 @@ class User:
         self._acr: AccessTokenResponse = acr
 
         self._avatar_hash = self._data.get("avatar")
-        self._avatar_format = "gif" if self._avatar_hash.startswith("a") else "png" if self._avatar_hash else None
+        self._avatar_format = None if not self._avatar_hash else "gif" if self._avatar_hash.startswith("a") else "png"
 
         self.id: int = int(self._data.get("id"))
         self.name: str = self._data.get("username")
-        self.avatar_url: str = "https://cdn.discordapp.com/avatars/{0.id}/{0._avatar_hash}.{0._avatar_format}".format(self) if self._avatar_hash else None
+        self.avatar_url: str = None if not self._avatar_hash else "https://cdn.discordapp.com/avatars/{0.id}/{0._avatar_hash}.{0._avatar_format}".format(self)
         self.discriminator: int = int(self._data.get("discriminator"))
         self.mfa_enabled: bool = self._data.get("mfa_enabled")
         self.email: str = self._data.get("email")
