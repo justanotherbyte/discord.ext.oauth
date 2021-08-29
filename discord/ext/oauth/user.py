@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import List, TYPE_CHECKING
 
+from .connection import Connection
 from .http import HTTPClient, Route
 from .guild import Guild
 
@@ -9,9 +10,7 @@ if TYPE_CHECKING:
     from .token import AccessTokenResponse
 
 
-__all__: tuple = (
-    "User",
-)
+__all__: tuple = ("User",)
 
 
 class User:
@@ -45,11 +44,11 @@ class User:
         self._acr: AccessTokenResponse = acr
 
         self._avatar_hash = self._data.get("avatar")
-        self._avatar_format = "gif" if self._avatar_hash.startswith("a") else "png"
+        self._avatar_format = None if not self._avatar_hash else "gif" if self._avatar_hash.startswith("a") else "png"
 
         self.id: int = int(self._data.get("id"))
         self.name: str = self._data.get("username")
-        self.avatar_url: str = "https://cdn.discordapp.com/avatars/{0.id}/{0._avatar_hash}.{0._avatar_format}".format(self)
+        self.avatar_url: str = None if not self._avatar_hash else "https://cdn.discordapp.com/avatars/{0.id}/{0._avatar_hash}.{0._avatar_format}".format(self)
         self.discriminator: int = int(self._data.get("discriminator"))
         self.mfa_enabled: bool = self._data.get("mfa_enabled")
         self.email: str = self._data.get("email")
@@ -58,14 +57,13 @@ class User:
         self.refresh_token: str = self._acr.refresh_token
 
         self.guilds: List[Guild] = []  # this is filled in when fetch_guilds is called
+        self.connections: List[Connection] = []  # this is filled in when fetch_connections is called
 
     def __str__(self) -> str:
         return "{0.name}#{0.discriminator}".format(self)
 
     def __repr__(self) -> str:
-        return "<User id={0.id} name={0.name} discriminator={0.discriminator} verified={0.verified}>".format(
-            self
-        )
+        return "<User id={0.id} name={0.name} discriminator={0.discriminator} verified={0.verified}>".format(self)
 
     async def refresh(self) -> AccessTokenResponse:
         """Refreshes the access token for the user and returns a fresh access token response.
@@ -108,5 +106,16 @@ class User:
             self.guilds.append(guild)
 
         return self.guilds
+
+    async def fetch_connections(self, *, refresh: bool = True) -> List[Connection]:
+        if not refresh and self.connections:
+            return self.connections
+
+        route = Route("GET", "/users/@me/connections")
+        headers = {"Authorization": "Bearer {}".format(self.access_token)}
+        resp = await self._http.request(route, headers=headers)
+
+        self.connections = [Connection(connection) for connection in resp]
+        return self.connections
 
     
