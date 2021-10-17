@@ -116,7 +116,7 @@ class User:
         }
 
         route = Route("PUT", "/guilds/{guild_id}/members/{user_id}", guild_id=guild_id, user_id=self.id)
-        resp = await self._http.request(Route, json=payload, headers=headers)
+        resp = await self._http.request(route, json=payload, headers=headers)
         return resp
        
 
