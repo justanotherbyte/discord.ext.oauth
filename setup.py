@@ -14,10 +14,10 @@ extras_require = {
 
 setup(
     name='discord-ext-oauth',
-    author='moanie',
+    author='justanotherbyte',
     python_requires='>=3.7.0',
-    url='https://github.com/moanie/discord.ext.oauth',
-    version="0.2.8",
+    url='https://github.com/justanotherbyte/discord.ext.oauth',
+    version="0.2.9",
     packages=[
         "discord/ext/oauth",
         "discord/ext/oauth/no_async"

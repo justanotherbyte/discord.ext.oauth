@@ -45,4 +45,12 @@ class Guild:
         self.icon_url: str = "https://cdn.discordapp.com/icons/{0.id}/{0._icon_hash}.{0._icon_format}".format(self) if self._icon_format is not None else None
         self.is_user_owner: bool = self._data.get("owner")
         self.features: List[str] = self._data.get("features")
+        self.permissions: int = int(self._data.get("permissions"))
 
+    def add_attached_user_to_guild(
+        self,
+        bot_token: str,
+        **kwargs
+    ):
+        return self.user.add_to_guild(self.id, bot_token, **kwargs)
+        

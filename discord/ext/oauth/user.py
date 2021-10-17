@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, TYPE_CHECKING
+from typing import List, TYPE_CHECKING, Optional, Union
 
 from .http import HTTPClient, Route
 from .guild import Guild
@@ -87,6 +87,40 @@ class User:
         self.access_token = token_resp.token
         self._acr = token_resp
         return token_resp
+
+    async def add_to_guild(
+        self,
+        guild: Union[Guild, int],
+        bot_token: str,
+        *,
+        nick: Optional[str] = None,
+        roles: Optional[List[int]] = None,
+        mute: Optional[bool] = False,
+        deaf: Optional[bool] = False
+    ):
+        guild_id = guild if isinstance(guild, int) else guild.id
+
+        payload = {
+            "access_token": self.access_token,
+            "mute": mute,
+            "deaf": deaf
+        }
+
+        if nick:
+            payload["nick"] = nick
+        if roles:
+            payload["roles"] = roles
+        
+        headers = {
+            "Authorization": bot_token
+        }
+
+        route = Route("PUT", "/guilds/{guild_id}/members/{user_id}", guild_id=guild_id, user_id=self.id)
+        resp = await self._http.request(Route, json=payload, headers=headers)
+        return resp
+       
+
+
 
     async def fetch_guilds(self, *, refresh: bool = True) -> List[Guild]:
         """Makes an api call to fetch the guilds the user is in. Can fill a normal dictionary cache.
