@@ -26,7 +26,7 @@ An asynchronous OAuth2 extension for discord.py.
 
 > Installing the development version:
 > ```sh
-> pip install git+https://github/moanie/discord-ext-oauth
+> pip install git+https://github/justanotherbyte/discord-ext-oauth
 > ```
 
 ## Example Usage
