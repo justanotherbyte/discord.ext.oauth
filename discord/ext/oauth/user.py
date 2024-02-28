@@ -49,6 +49,7 @@ class User:
 
         self.id: int = int(self._data.get("id"))
         self.name: str = self._data.get("username")
+        self.global_name: str = self._data.get("global_name")
         self.avatar_url: str = "https://cdn.discordapp.com/avatars/{0.id}/{0._avatar_hash}.{0._avatar_format}".format(self) if self._avatar_format else None
         self.discriminator: int = int(self._data.get("discriminator"))
         self.mfa_enabled: bool = self._data.get("mfa_enabled")
